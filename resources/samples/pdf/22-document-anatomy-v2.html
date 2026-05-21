@@ -1,0 +1,1847 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Document Anatomy — Visual Reference v2</title>
+<style>
+  :root {
+    --ivory: #FAF9F5;
+    --slate: #141413;
+    --clay: #D97757;
+    --oat: #E3DACC;
+    --olive: #788C5D;
+    --info: #5C7CA3;
+    --danger: #B04A4A;
+    --warning: #C78E3F;
+    --gray-100: #F0EEE6;
+    --gray-300: #D1CFC5;
+    --gray-500: #87867F;
+    --gray-700: #3D3D3A;
+    --white: #FFFFFF;
+    --serif: ui-serif, Georgia, serif;
+    --sans: system-ui, -apple-system, sans-serif;
+    --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+    --radius-panel: 12px;
+    --radius-row: 8px;
+    --border: 1.5px solid var(--gray-300);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 48px 24px 96px;
+    background: var(--ivory);
+    color: var(--slate);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ===================== HEADER ===================== */
+  header {
+    margin-bottom: 56px;
+    padding-bottom: 32px;
+    border-bottom: var(--border);
+  }
+
+  header .tag {
+    display: inline-block;
+    background: var(--clay);
+    color: var(--white);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  header h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 44px;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+  }
+
+  header p {
+    color: var(--gray-500);
+    font-size: 15px;
+    margin: 0 0 20px;
+    max-width: 640px;
+  }
+
+  .source-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .source-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gray-500);
+    background: var(--gray-100);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  /* ===================== SECTION LAYOUT ===================== */
+  .doc-section {
+    margin-bottom: 72px;
+  }
+
+  .doc-section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .doc-section-header h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 26px;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .doc-section-header .type-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-500);
+  }
+
+  .doc-section-header .source-ref {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--info);
+    margin-left: auto;
+  }
+
+  /* ===================== ANATOMY CONTAINER ===================== */
+  .anatomy {
+    background: var(--white);
+    border: var(--border);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(20,20,19,0.04);
+  }
+
+  /* ===================== BLOCKS ===================== */
+  .block {
+    position: relative;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .block:last-child { border-bottom: none; }
+
+  .block-label {
+    position: absolute;
+    top: -1px;
+    left: 16px;
+    background: var(--clay);
+    color: var(--white);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 0 0 6px 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 10;
+  }
+
+  .block-label.info { background: var(--info); }
+  .block-label.success { background: var(--olive); }
+  .block-label.warning { background: var(--warning); }
+  .block-label.danger { background: var(--danger); }
+  .block-label.slate { background: var(--slate); }
+
+  .block-content {
+    color: var(--gray-500);
+    font-size: 13px;
+  }
+
+  .block-content strong {
+    color: var(--slate);
+    font-weight: 500;
+  }
+
+  /* ===================== SUB-BLOCK ===================== */
+  .sub-block {
+    margin-top: 12px;
+    padding: 14px 16px;
+    background: var(--gray-100);
+    border-radius: var(--radius-row);
+    border-left: 3px solid var(--clay);
+    font-size: 13px;
+  }
+
+  .sub-block.info { border-left-color: var(--info); }
+  .sub-block.success { border-left-color: var(--olive); }
+  .sub-block.warning { border-left-color: var(--warning); }
+
+  .sub-block .tag {
+    display: inline;
+    background: none;
+    padding: 0;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--clay);
+    margin-right: 8px;
+  }
+
+  .sub-block.info .tag { color: var(--info); }
+  .sub-block.success .tag { color: var(--olive); }
+  .sub-block.warning .tag { color: var(--warning); }
+
+  /* ===================== KEY-VALUE LINES ===================== */
+  .kv-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .kv-row:last-child { margin-bottom: 0; }
+
+  .kv-key {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gray-500);
+    width: 56px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+
+  .kv-val {
+    font-size: 14px;
+    color: var(--slate);
+  }
+
+  /* ===================== INLINE ANATOMICAL ===================== */
+  .anat {
+    display: inline-block;
+    background: rgba(217, 119, 87, 0.1);
+    border: 1px dashed var(--clay);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--clay);
+    white-space: nowrap;
+  }
+
+  .anat.info { background: rgba(92, 124, 163, 0.1); border-color: var(--info); color: var(--info); }
+  .anat.success { background: rgba(120, 140, 93, 0.1); border-color: var(--olive); color: var(--olive); }
+  .anat.warning { background: rgba(199, 142, 63, 0.1); border-color: var(--warning); color: var(--warning); }
+  .anat.danger { background: rgba(176, 74, 74, 0.1); border-color: var(--danger); color: var(--danger); }
+
+  /* ===================== TABLES ===================== */
+  .anat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  .anat-table th {
+    background: var(--gray-100);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-500);
+    text-align: left;
+    padding: 10px 14px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--gray-300);
+  }
+
+  .anat-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--gray-700);
+    vertical-align: top;
+  }
+
+  .anat-table tr:last-child td { border-bottom: none; }
+  .anat-table tr:hover td { background: rgba(217, 119, 87, 0.03); }
+
+  /* ===================== LEGEND ===================== */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+    padding: 16px 24px;
+    background: var(--gray-100);
+    border-top: 1px solid var(--gray-300);
+    font-size: 12px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gray-700);
+  }
+
+  .legend-item .anat {
+    font-size: 10px;
+    padding: 1px 5px;
+  }
+
+  /* ===================== HIERARCHY ===================== */
+  .hierarchy {
+    padding: 8px 0;
+  }
+
+  .hierarchy-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    border-left: 2px solid var(--gray-300);
+    margin-left: 8px;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .hierarchy-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 14px;
+    width: 8px;
+    height: 2px;
+    background: var(--gray-300);
+  }
+
+  .hierarchy-item .anat {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .hierarchy-item .desc {
+    color: var(--gray-700);
+    font-size: 13px;
+  }
+
+  /* ===================== GRID LAYOUTS ===================== */
+  .anatomy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .anatomy-grid .block {
+    border-bottom: none;
+    border-right: 1px solid var(--gray-100);
+  }
+
+  .anatomy-grid .block:nth-child(even) { border-right: none; }
+  .anatomy-grid .block:nth-child(n+3) { border-top: 1px solid var(--gray-100); }
+
+  .anatomy-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .anatomy-grid-3 .block {
+    border-bottom: none;
+    border-right: 1px solid var(--gray-100);
+  }
+
+  .anatomy-grid-3 .block:last-child { border-right: none; }
+
+  /* ===================== STATS ROW ===================== */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--gray-300);
+    border-top: 1px solid var(--gray-100);
+  }
+
+  .stat-block {
+    background: var(--white);
+    padding: 16px 20px;
+    text-align: center;
+  }
+
+  .stat-block .anat {
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .stat-block .value {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--slate);
+  }
+
+  /* ===================== COVER BLOCK ===================== */
+  .cover-block {
+    padding: 40px 24px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
+  }
+
+  .cover-block .title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .cover-block .meta {
+    color: var(--gray-500);
+    font-size: 13px;
+  }
+
+  /* ===================== SIGNATURE ===================== */
+  .sig-row {
+    display: flex;
+    gap: 48px;
+    margin-top: 32px;
+  }
+
+  .sig-box {
+    flex: 1;
+    border-top: 1px solid var(--slate);
+    padding-top: 8px;
+  }
+
+  .sig-box .name {
+    font-weight: 500;
+    color: var(--slate);
+  }
+
+  .sig-box .meta {
+    font-size: 12px;
+    color: var(--gray-500);
+    margin-top: 2px;
+  }
+
+  /* ===================== QUOTE BLOCK ===================== */
+  .quote-block {
+    padding: 20px 24px;
+    background: var(--gray-100);
+    border-left: 4px solid var(--clay);
+    font-style: italic;
+    color: var(--gray-700);
+  }
+
+  .quote-block .attribution {
+    margin-top: 12px;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--slate);
+    font-size: 13px;
+  }
+
+  /* ===================== STATUS BADGE ===================== */
+  .status-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .status-badge.on-track { background: rgba(120, 140, 93, 0.15); color: var(--olive); }
+  .status-badge.at-risk { background: rgba(199, 142, 63, 0.15); color: var(--warning); }
+  .status-badge.blocked { background: rgba(176, 74, 74, 0.15); color: var(--danger); }
+
+  /* ===================== DOCUMENT TYPE INDEX ===================== */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  .index-card {
+    background: var(--white);
+    border: var(--border);
+    border-radius: var(--radius-row);
+    padding: 16px;
+    font-size: 13px;
+  }
+
+  .index-card strong {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .index-card span {
+    color: var(--gray-500);
+    font-size: 12px;
+  }
+
+  /* ===================== COMPARISON TABLE ===================== */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .comparison-table th {
+    background: var(--slate);
+    color: var(--white);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .comparison-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--gray-700);
+  }
+
+  .comparison-table tr:nth-child(even) td { background: var(--gray-100); }
+  .comparison-table tr:last-child td { border-bottom: none; }
+
+  .comparison-table td:first-child {
+    font-weight: 500;
+    color: var(--slate);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ===================== HEADER ===================== -->
+  <header>
+    <span class="tag">Research-Backed Reference</span>
+    <h1>Business Document Anatomy</h1>
+    <p>Visual breakdown of 14 essential business document types. Based on research from Perplexity, Exa, Firecrawl, and Tavily — covering government/military standards, corporate best practices, and professional writing guidelines.</p>
+    <div class="source-tags">
+      <span class="source-tag">perplexity</span>
+      <span class="source-tag">exa</span>
+      <span class="source-tag">firecrawl</span>
+      <span class="source-tag">tavily</span>
+    </div>
+  </header>
+
+  <!-- ===================== DOCUMENT TYPE INDEX ===================== -->
+  <div class="index-grid">
+    <div class="index-card"><strong>Email</strong><span>Correspondence</span></div>
+    <div class="index-card"><strong>Memo</strong><span>Internal Communication</span></div>
+    <div class="index-card"><strong>Policy</strong><span>Governance</span></div>
+    <div class="index-card"><strong>Status Report</strong><span>Project Update</span></div>
+    <div class="index-card"><strong>Proposal</strong><span>Sales / Scope</span></div>
+    <div class="index-card"><strong>SOW</strong><span>Contract / Legal</span></div>
+    <div class="index-card"><strong>Invoice</strong><span>Payment Request</span></div>
+    <div class="index-card"><strong>Meeting Minutes</strong><span>Meeting Record</span></div>
+    <div class="index-card"><strong>Press Release</strong><span>Media Announcement</span></div>
+    <div class="index-card"><strong>FAQ</strong><span>Q&amp;A Reference</span></div>
+    <div class="index-card"><strong>Release Notes</strong><span>Changelog</span></div>
+    <div class="index-card"><strong>Incident Report</strong><span>Post-Mortem</span></div>
+    <div class="index-card"><strong>Business Case</strong><span>Investment Justification</span></div>
+    <div class="index-card"><strong>Executive Brief</strong><span>BLUF Format</span></div>
+  </div>
+
+  <!-- ===================== EMAIL ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Email</h2>
+      <span class="type-label">Correspondence</span>
+      <span class="source-ref">perplexity · exa</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Header Fields</span>
+        <div class="kv-row">
+          <span class="kv-key">To:</span>
+          <span class="kv-val"><strong>team@company.com</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">From:</span>
+          <span class="kv-val"><strong>you@company.com</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Subject:</span>
+          <span class="kv-val"><strong>Q3 Planning — Confirmed Times</strong></span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label">Greeting</span>
+        <div class="block-content">Hi team,<br><br></div>
+      </div>
+      <div class="block">
+        <span class="block-label">Body</span>
+        <div class="block-content">
+          <strong>Opening:</strong> Main message stated immediately<br>
+          <strong>Supporting:</strong> Context, details, evidence<br>
+          <strong>Closing:</strong> Call to action or next step
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label">Signature</span>
+        <div class="block-content">
+          <strong>Your Name</strong><br>
+          <span style="color:var(--gray-500)">Job Title · Department</span><br>
+          <span style="color:var(--gray-500)">Phone · Slack · Email</span>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">To</span> Recipient(s)</div>
+        <div class="legend-item"><span class="anat info">From</span> Sender</div>
+        <div class="legend-item"><span class="anat">Subject</span> Summary line</div>
+        <div class="legend-item"><span class="anat success">Greeting</span> Salutation</div>
+        <div class="legend-item"><span class="anat warning">Body</span> Message content</div>
+        <div class="legend-item"><span class="anat slate">Sig</span> Contact block</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MEMO ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Memo</h2>
+      <span class="type-label">Internal Memorandum</span>
+      <span class="source-ref">perplexity · exa · firecrawl · tavily</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Header Block</span>
+        <div class="kv-row">
+          <span class="kv-key">To:</span>
+          <span class="kv-val"><strong>All Staff</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">From:</span>
+          <span class="kv-val"><strong>Sarah Chen, VP Operations</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Date:</span>
+          <span class="kv-val"><strong>May 19, 2026</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Re:</span>
+          <span class="kv-val"><strong>Updated Remote Work Policy</strong></span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label">Purpose / BLUF</span>
+        <div class="block-content">
+          This memo announces <strong>updated remote work guidelines</strong> effective <strong>June 1, 2026</strong>. Employees may work remotely up to 3 days per week.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Background</span>
+        <div class="block-content">
+          Context on why this policy exists — regulatory changes, company decision, etc.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">Details / Discussion</span>
+        <div class="sub-block">
+          <span class="tag">New Requirements</span> Core rules and expectations
+        </div>
+        <div class="sub-block info">
+          <span class="tag">Implementation</span> How to comply, timeline
+        </div>
+        <div class="sub-block warning">
+          <span class="tag">Impacts</span> Effects on teams or processes
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Action Items</span>
+        <div class="block-content">
+          Explicit tasks: <strong>what</strong> to do, <strong>who</strong> does it, <strong>by when</strong>.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label slate">Closing / Contact</span>
+        <div class="block-content">
+          Questions: <strong>hr@company.com</strong>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Header</span> To/From/Date/Re</div>
+        <div class="legend-item"><span class="anat success">Purpose</span> Main point upfront</div>
+        <div class="legend-item"><span class="anat info">Background</span> Why this memo</div>
+        <div class="legend-item"><span class="anat warning">Details</span> Main content</div>
+        <div class="legend-item"><span class="anat danger">Actions</span> Required tasks</div>
+        <div class="legend-item"><span class="anat slate">Contact</span> Questions</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== POLICY DOCUMENT ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Policy Document</h2>
+      <span class="type-label">Governance</span>
+      <span class="source-ref">perplexity · tavily</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Policy Header</span>
+        <div style="display:flex;gap:32px;flex-wrap:wrap;">
+          <div><span class="anat">Number</span> <strong>HR-2026-014</strong></div>
+          <div><span class="anat info">Effective</span> <strong>June 1, 2026</strong></div>
+          <div><span class="anat warning">Version</span> <strong>2.1</strong></div>
+          <div><span class="anat success">Owner</span> <strong>Sarah Chen, VP People</strong></div>
+        </div>
+        <div style="margin-top:16px;">
+          <strong style="font-size:18px;font-family:var(--serif);">Remote Work Policy</strong>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label">Purpose</span>
+        <div class="block-content">
+          Why the policy exists — link to organizational goals, risk mitigation, or regulatory requirements.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Scope</span>
+        <div class="block-content">
+          <strong>Who:</strong> All full-time employees in Engineering, Product, Design<br>
+          <strong>What:</strong> Remote work arrangements up to 3 days/week<br>
+          <strong>Where:</strong> All US offices
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">Definitions</span>
+        <div class="block-content">
+          <strong>Remote Day:</strong> Any day employee works from home<br>
+          <strong>Core Hours:</strong> 10 AM–3 PM in local timezone
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Policy Statement</span>
+        <div class="block-content">
+          The actual <strong>rule</strong>: what is required, permitted, or prohibited.<br>
+          "Employees <strong>must</strong> maintain core collaboration hours..."<br>
+          "Employees <strong>shall not</strong>..."
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label danger">Procedures</span>
+        <div class="sub-block">
+          <span class="tag">Request</span> Submit via HR portal at least 5 days before start
+        </div>
+        <div class="sub-block">
+          <span class="tag">Approval</span> Manager decides within 3 business days
+        </div>
+        <div class="sub-block">
+          <span class="tag">Review</span> Arrangements reviewed quarterly
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label slate">Roles &amp; Responsibilities</span>
+        <div class="block-content">
+          <strong>Employees:</strong> Comply with policy, submit requests<br>
+          <strong>Managers:</strong> Review and approve requests<br>
+          <strong>HR:</strong> Maintain policy, handle exceptions
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label">Exceptions</span>
+        <div class="block-content">
+          Who can approve: <strong>Chief People Officer</strong><br>
+          Documentation required: Written request + business justification
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label danger">Enforcement</span>
+        <div class="block-content">
+          Consequences: <strong>Revoked remote privileges</strong>, <strong>performance review impact</strong>, disciplinary action up to termination.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">References</span>
+        <div class="block-content">
+          Related policies, laws, forms, SOPs.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label slate">Revision History</span>
+        <table class="anat-table">
+          <thead>
+            <tr>
+              <th>Version</th>
+              <th>Date</th>
+              <th>Change</th>
+              <th>Author</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2.1</td>
+              <td>May 19, 2026</td>
+              <td>Updated core hours</td>
+              <td>S. Chen</td>
+            </tr>
+            <tr>
+              <td>2.0</td>
+              <td>Jan 15, 2026</td>
+              <td>Major revision</td>
+              <td>S. Chen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Header</span> Number/date/version</div>
+        <div class="legend-item"><span class="anat success">Purpose</span> Why exists</div>
+        <div class="legend-item"><span class="anat info">Scope</span> Who/what/where</div>
+        <div class="legend-item"><span class="anat warning">Statement</span> The rule itself</div>
+        <div class="legend-item"><span class="anat danger">Procedures</span> How to comply</div>
+        <div class="legend-item"><span class="anat slate">Enforcement</span> Consequences</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATUS REPORT ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Status Report</h2>
+      <span class="type-label">Project Update</span>
+      <span class="source-ref">perplexity</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Project Header</span>
+        <div class="kv-row">
+          <span class="kv-key">Project:</span>
+          <span class="kv-val"><strong>Platform Migration Q2</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Period:</span>
+          <span class="kv-val"><strong>May 12–19, 2026</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Status:</span>
+          <span class="kv-val"><span class="status-badge on-track">On Track</span></span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">Accomplishments</span>
+        <div class="block-content">
+          • Completed <strong>database schema migration</strong><br>
+          • Deployed to <strong>staging environment</strong><br>
+          • <strong>3/5</strong> API endpoints migrated
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label danger">Blockers / Risks</span>
+        <div class="sub-block danger">
+          <span class="tag">Pending</span> Third-party API credentials from vendor
+        </div>
+        <div class="sub-block warning">
+          <span class="tag">Risk</span> Timeline slip by 2 days if credentials delayed
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Next Steps</span>
+        <div class="block-content">
+          • Finish remaining API migrations<br>
+          • Begin user acceptance testing<br>
+          • Schedule production deployment
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-block">
+          <span class="anat success">Progress</span>
+          <span class="value">60%</span>
+        </div>
+        <div class="stat-block">
+          <span class="anat info">Budget</span>
+          <span class="value">$42k</span>
+        </div>
+        <div class="stat-block">
+          <span class="anat warning">Deadline</span>
+          <span class="value">Jun 15</span>
+        </div>
+        <div class="stat-block">
+          <span class="anat">Sprint</span>
+          <span class="value">7/12</span>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Header</span> Project + period</div>
+        <div class="legend-item"><span class="anat success">Done</span> Completed work</div>
+        <div class="legend-item"><span class="anat danger">Blockers</span> Issues + risks</div>
+        <div class="legend-item"><span class="anat info">Next</span> Upcoming work</div>
+        <div class="legend-item"><span class="anat warning">Stats</span> KPIs at glance</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROPOSAL ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Proposal</h2>
+      <span class="type-label">Sales / Project Scope</span>
+      <span class="source-ref">perplexity</span>
+    </div>
+    <div class="anatomy">
+      <div class="cover-block">
+        <span class="anat slate">Cover</span>
+        <div class="title">Website Redesign Proposal</div>
+        <div class="meta">Prepared for Acme Corp · May 2026</div>
+      </div>
+      <div class="block">
+        <span class="block-label">Executive Summary</span>
+        <div class="sub-block">
+          <span class="tag">Problem</span> Acme's conversion rate is 2.1%
+        </div>
+        <div class="sub-block success">
+          <span class="tag">Solution</span> Full redesign focused on UX improvement
+        </div>
+        <div class="sub-block info">
+          <span class="tag">Outcome</span> Target 4.5% conversion rate
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Scope of Work</span>
+        <div class="hierarchy">
+          <div class="hierarchy-item">
+            <span class="anat">Discovery</span>
+            <span class="desc">User research, analytics review, stakeholder interviews</span>
+          </div>
+          <div class="hierarchy-item">
+            <span class="anat info">Design</span>
+            <span class="desc">Wireframes, mockups, design system, prototype</span>
+          </div>
+          <div class="hierarchy-item">
+            <span class="anat success">Development</span>
+            <span class="desc">Frontend build, CMS integration, testing</span>
+          </div>
+          <div class="hierarchy-item">
+            <span class="anat warning">Launch</span>
+            <span class="desc">Deployment, training, 30-day support</span>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label slate">Timeline</span>
+        <table class="anat-table">
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>Duration</th>
+              <th>Start</th>
+              <th>End</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Discovery</td>
+              <td>2 weeks</td>
+              <td>Jun 1</td>
+              <td>Jun 14</td>
+            </tr>
+            <tr>
+              <td>Design</td>
+              <td>3 weeks</td>
+              <td>Jun 15</td>
+              <td>Jul 5</td>
+            </tr>
+            <tr>
+              <td>Development</td>
+              <td>6 weeks</td>
+              <td>Jul 6</td>
+              <td>Aug 16</td>
+            </tr>
+            <tr>
+              <td>Launch</td>
+              <td>1 week</td>
+              <td>Aug 17</td>
+              <td>Aug 23</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block">
+        <span class="block-label danger">Investment</span>
+        <div style="font-size:28px;font-weight:600;margin-top:8px;">$85,000</div>
+        <div style="color:var(--gray-500);font-size:13px;">Payment schedule tied to milestones</div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat slate">Cover</span> Title + client</div>
+        <div class="legend-item"><span class="anat">Summary</span> Problem/solution/outcome</div>
+        <div class="legend-item"><span class="anat warning">Scope</span> Deliverables</div>
+        <div class="legend-item"><span class="anat slate">Timeline</span> Phases + dates</div>
+        <div class="legend-item"><span class="anat danger">Price</span> Investment + terms</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOW ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Statement of Work</h2>
+      <span class="type-label">Contract / Legal</span>
+      <span class="source-ref">tavily</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Parties</span>
+        <div class="kv-row">
+          <span class="kv-key">Client:</span>
+          <span class="kv-val"><strong>Acme Corporation</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Provider:</span>
+          <span class="kv-val"><strong>Studio Alpha LLC</strong></span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Recitals / Background</span>
+        <div class="block-content" style="font-style:italic;color:var(--gray-700);">
+          "Whereas Client desires to engage Provider for website redesign services; and Whereas Provider agrees to provide such services..."
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Terms</span>
+        <div class="sub-block">
+          <span class="tag">Scope</span> Detailed description of services, deliverables, acceptance criteria
+        </div>
+        <div class="sub-block success">
+          <span class="tag">Compensation</span> Payment amount, schedule, invoicing terms
+        </div>
+        <div class="sub-block info">
+          <span class="tag">Timeline</span> Key dates, milestones, deliverables schedule
+        </div>
+        <div class="sub-block">
+          <span class="tag">IP Rights</span> Who owns deliverables, work product, pre-existing materials
+        </div>
+        <div class="sub-block warning">
+          <span class="tag">Confidentiality</span> NDA terms, non-disclosure obligations
+        </div>
+        <div class="sub-block danger">
+          <span class="tag">Termination</span> How to end agreement, notice period, termination fees
+        </div>
+        <div class="sub-block">
+          <span class="tag">Liability</span> Limitation of liability, indemnification
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label slate">Signatures</span>
+        <div class="sig-row">
+          <div class="sig-box">
+            <span class="name">Marcus Rivera</span>
+            <div class="meta">Provider · CEO</div>
+            <div class="meta">Date: _____________</div>
+          </div>
+          <div class="sig-box">
+            <span class="name">Jennifer Walsh</span>
+            <div class="meta">Client · COO</div>
+            <div class="meta">Date: _____________</div>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Parties</span> Who is agreeing</div>
+        <div class="legend-item"><span class="anat info">Recitals</span> Background context</div>
+        <div class="legend-item"><span class="anat warning">Terms</span> Legal obligations</div>
+        <div class="legend-item"><span class="anat slate">Sigs</span> Authorized signers</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INVOICE ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Invoice</h2>
+      <span class="type-label">Payment Request</span>
+      <span class="source-ref">perplexity</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Header</span>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;">
+          <div>
+            <strong style="font-size:18px;">Studio Alpha</strong><br>
+            <span style="color:var(--gray-500)">123 Design St, San Francisco CA 94102</span>
+          </div>
+          <div style="text-align:right;">
+            <span class="anat">Invoice #</span> <strong>INV-2026-042</strong><br>
+            <span class="anat info">Date</span> <strong>May 19, 2026</strong><br>
+            <span class="anat warning">Due</span> <strong>June 18, 2026</strong>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">Bill To</span>
+        <div class="block-content">
+          <strong>Acme Corporation</strong><br>
+          456 Business Ave, Suite 200<br>
+          San Francisco, CA 94107
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Line Items</span>
+        <table class="anat-table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th style="width:60px;">Qty</th>
+              <th style="width:100px;">Unit Price</th>
+              <th style="width:100px;">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Website redesign — Discovery phase</td>
+              <td>1</td>
+              <td>$15,000.00</td>
+              <td>$15,000.00</td>
+            </tr>
+            <tr>
+              <td>Website redesign — Design phase</td>
+              <td>1</td>
+              <td>$22,500.00</td>
+              <td>$22,500.00</td>
+            </tr>
+            <tr>
+              <td>Additional wireframes (3 pages)</td>
+              <td>3</td>
+              <td>$500.00</td>
+              <td>$1,500.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block">
+        <span class="block-label danger">Totals</span>
+        <div style="max-width:280px;margin-left:auto;">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);">
+            <span style="color:var(--gray-500)">Subtotal</span>
+            <span>$39,000.00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);">
+            <span style="color:var(--gray-500)">Tax (0%)</span>
+            <span>$0.00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:18px;font-weight:600;">
+            <span>Total Due</span>
+            <span>$39,000.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label slate">Payment Terms</span>
+        <div class="block-content">
+          Payment due within <strong>30 days</strong>.<br>
+          Bank transfer: <strong>Chase Bank · Routing: 021000021 · Acct: ****4521</strong>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Header</span> Sender + dates</div>
+        <div class="legend-item"><span class="anat success">Bill To</span> Client info</div>
+        <div class="legend-item"><span class="anat warning">Items</span> Services rendered</div>
+        <div class="legend-item"><span class="anat danger">Totals</span> Subtotal + tax + due</div>
+        <div class="legend-item"><span class="anat slate">Terms</span> Payment instructions</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MEETING MINUTES ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Meeting Minutes</h2>
+      <span class="type-label">Meeting Record</span>
+      <span class="source-ref">perplexity</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Meeting Header</span>
+        <div class="kv-row">
+          <span class="kv-key">Meeting:</span>
+          <span class="kv-val"><strong>Weekly Engineering Sync</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Date:</span>
+          <span class="kv-val"><strong>May 19, 2026 · 10:00–10:45 AM</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Location:</span>
+          <span class="kv-val"><strong>Zoom · Link in invite</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Facilitator:</span>
+          <span class="kv-val"><strong>Marcus Rivera</strong></span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">Attendees</span>
+        <div class="block-content">
+          <strong>Present (4):</strong> Marcus Rivera, Anna Kim, David Park, Lisa Chen<br>
+          <strong>Absent (1):</strong> Tom Bradley (out sick)
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Agenda</span>
+        <div class="block-content">
+          1. Sprint review — Q2 targets<br>
+          2. Migration blocker: API credentials<br>
+          3. Team capacity for June
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Discussion Notes</span>
+        <div class="sub-block">
+          <span class="tag">Sprint Review</span>
+          On track to hit 85% of Q2 goals. Migrating 5 APIs per week.
+        </div>
+        <div class="sub-block danger">
+          <span class="tag">API Blocker</span>
+          Vendor hasn't provided credentials. Marcus to escalate to their CTO.
+        </div>
+        <div class="sub-block warning">
+          <span class="tag">Capacity</span>
+          Lisa out June 10–14 (PTO). David can cover her tasks.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label danger">Action Items</span>
+        <table class="anat-table">
+          <thead>
+            <tr>
+              <th>Action</th>
+              <th style="width:120px;">Owner</th>
+              <th style="width:80px;">Due</th>
+              <th style="width:70px;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Escalate API credentials to vendor CTO</td>
+              <td>Marcus Rivera</td>
+              <td>May 20</td>
+              <td><span class="status-badge at-risk">At Risk</span></td>
+            </tr>
+            <tr>
+              <td>Prepare coverage plan for Lisa's PTO</td>
+              <td>David Park</td>
+              <td>May 22</td>
+              <td><span class="status-badge on-track">On Track</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Header</span> When + where</div>
+        <div class="legend-item"><span class="anat success">Attendees</span> Who was there</div>
+        <div class="legend-item"><span class="anat info">Agenda</span> Topics covered</div>
+        <div class="legend-item"><span class="anat warning">Notes</span> Discussion summary</div>
+        <div class="legend-item"><span class="anat danger">Actions</span> Follow-up tasks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRESS RELEASE ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Press Release</h2>
+      <span class="type-label">Media Announcement</span>
+      <span class="source-ref">perplexity</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Dateline</span>
+        <div class="block-content">
+          <strong>SAN FRANCISCO, May 19, 2026</strong> — <span class="anat">News Source</span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label danger">Headline</span>
+        <div style="font-size:22px;font-family:var(--serif);font-weight:500;margin-top:8px;">
+          Anthropic Launches Claude 4.7 with Extended Thinking
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Subheadline</span>
+        <div class="block-content">
+          New model achieves state-of-the-art reasoning while reducing hallucinations by 40%
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Opening Paragraph</span>
+        <div class="block-content">
+          Anthropic PBC today announced the release of <strong>Claude 4.7</strong>, its most capable AI assistant yet. The model introduces extended thinking capabilities that allow for more nuanced reasoning on complex tasks.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">Body / Quote</span>
+        <div class="quote-block">
+          "This represents a fundamental breakthrough in how AI can assist with complex, multi-step reasoning."
+          <div class="attribution">— <strong>Dario Amodei</strong>, CEO, Anthropic PBC</div>
+        </div>
+        <div class="block-content" style="margin-top:16px;">
+          Additional paragraphs with <strong>key details</strong>, <strong>features</strong>, <strong>availability</strong>, and <strong>pricing</strong>.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label slate">Boilerplate</span>
+        <div style="font-size:12px;color:var(--gray-700);">
+          <strong>About Anthropic</strong> — Anthropic PBC is an AI safety company building reliable, interpretable, and steerable AI systems. Founded in 2021, Anthropic has raised $5.5B in funding.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label">Media Contact</span>
+        <div class="block-content">
+          press@anthropic.com · (415) 555-0123
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Dateline</span> Location + date</div>
+        <div class="legend-item"><span class="anat danger">Headline</span> Main announcement</div>
+        <div class="legend-item"><span class="anat warning">Subhead</span> Supporting detail</div>
+        <div class="legend-item"><span class="anat info">Body</span> Story + context</div>
+        <div class="legend-item"><span class="anat success">Quote</span> Executive statement</div>
+        <div class="legend-item"><span class="anat slate">Boiler</span> Company bio</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>FAQ</h2>
+      <span class="type-label">Q&amp;A Reference</span>
+      <span class="source-ref">perplexity</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Context Header</span>
+        <div class="kv-row">
+          <span class="kv-key">Topic:</span>
+          <span class="kv-val"><strong>New Employee Benefits Enrollment</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Updated:</span>
+          <span class="kv-val"><strong>May 19, 2026</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Owner:</span>
+          <span class="kv-val"><strong>hr@company.com</strong></span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Questions</span>
+        <div class="sub-block">
+          <span class="anat">Q</span> <strong>When can I enroll in benefits?</strong><br>
+          <span style="margin-left:20px;margin-top:4px;display:block;"><span class="anat success">A</span> Within <strong>30 days</strong> of start date, or during annual open enrollment (November).</span>
+        </div>
+        <div class="sub-block info">
+          <span class="anat">Q</span> <strong>What health plans are available?</strong><br>
+          <span style="margin-left:20px;margin-top:4px;display:block;"><span class="anat success">A</span> Three PPO options and two HMO plans through Aetna and Kaiser.</span>
+        </div>
+        <div class="sub-block success">
+          <span class="anat">Q</span> <strong>Does the company match 401k contributions?</strong><br>
+          <span style="margin-left:20px;margin-top:4px;display:block;"><span class="anat success">A</span> Yes, we match <strong>100% up to 4%</strong> of your salary.</span>
+        </div>
+        <div class="sub-block">
+          <span class="anat">Q</span> <strong>How do I add dependents?</strong><br>
+          <span style="margin-left:20px;margin-top:4px;display:block;"><span class="anat success">A</span> Submit documentation via HR portal within 30 days of qualifying event.</span>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Context</span> Topic + scope</div>
+        <div class="legend-item"><span class="anat">Q</span> Question</div>
+        <div class="legend-item"><span class="anat success">A</span> Answer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RELEASE NOTES ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Release Notes</h2>
+      <span class="type-label">Changelog</span>
+      <span class="source-ref">perplexity</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Version Header</span>
+        <div class="kv-row">
+          <span class="kv-key">Version:</span>
+          <span class="kv-val"><strong>4.7.0</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Released:</span>
+          <span class="kv-val"><strong>May 19, 2026</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Type:</span>
+          <span class="kv-val"><span class="status-badge on-track">Minor Release</span></span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">New Features</span>
+        <div class="block-content">
+          • <strong>Extended thinking</strong> — Model can think for up to 60 seconds<br>
+          • <strong>Document upload v2</strong> — Supports PDFs up to 500 pages<br>
+          • <strong>Custom instructions</strong> — Save behaviors as reusable templates
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Improvements</span>
+        <div class="block-content">
+          • Reduced hallucinations by <strong>40%</strong> on factual queries<br>
+          • <strong>2x faster</strong> response times for coding tasks<br>
+          • Better handling of <strong>ambiguous queries</strong>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Bug Fixes</span>
+        <div class="block-content">
+          • Fixed PDF rendering issue with Chinese characters<br>
+          • Resolved memory leak in long conversations<br>
+          • Corrected timezone handling in calendar exports
+        </div>
+      </div>
+      <div class="block" style="background:rgba(176,74,74,0.03);">
+        <span class="block-label danger">Breaking Changes</span>
+        <div class="sub-block danger">
+          <span class="tag">API</span> API v1 deprecated — migrate to v2 by August 1, 2026
+        </div>
+        <div class="sub-block danger">
+          <span class="tag">Format</span> <code>thinking</code> block now separate from <code>content</code>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Header</span> Version + date</div>
+        <div class="legend-item"><span class="anat success">New</span> Added features</div>
+        <div class="legend-item"><span class="anat info">Improvements</span> Enhancements</div>
+        <div class="legend-item"><span class="anat warning">Fixes</span> Bug corrections</div>
+        <div class="legend-item"><span class="anat danger">Breaking</span> Breaking changes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INCIDENT REPORT ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Incident Report</h2>
+      <span class="type-label">Post-Mortem</span>
+      <span class="source-ref">perplexity</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Incident Header</span>
+        <div class="kv-row">
+          <span class="kv-key">Incident:</span>
+          <span class="kv-val"><strong>INC-2026-0847</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Date:</span>
+          <span class="kv-val"><strong>May 15, 2026 · 14:32 UTC</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Severity:</span>
+          <span class="kv-val"><span class="status-badge blocked">SEV-1</span></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Status:</span>
+          <span class="kv-val"><span class="status-badge on-track">Resolved</span></span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label danger">Summary</span>
+        <div class="block-content">
+          <strong>What happened:</strong> Database primary node failed during peak traffic, causing 45-minute outage.<br>
+          <strong>Impact:</strong> 12,847 users affected, ~$50k estimated revenue loss.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Timeline</span>
+        <table class="anat-table">
+          <thead>
+            <tr>
+              <th>Time (UTC)</th>
+              <th>Event</th>
+              <th>Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>14:32</td>
+              <td>Primary DB node unresponsive</td>
+              <td>Auto-detected</td>
+            </tr>
+            <tr>
+              <td>14:33</td>
+              <td>PagerDuty alert triggered</td>
+              <td>On-call SRE</td>
+            </tr>
+            <tr>
+              <td>14:35</td>
+              <td>Failover initiated</td>
+              <td>David Park</td>
+            </tr>
+            <tr>
+              <td>14:47</td>
+              <td>Service restored via replica</td>
+              <td>David Park</td>
+            </tr>
+            <tr>
+              <td>15:17</td>
+              <td>Root cause identified</td>
+              <td>Platform Team</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Root Cause</span>
+        <div class="block-content">
+          <strong>Hardware failure:</strong> RAID controller on primary DB node reported predictive failure 3 days prior but no replacement was scheduled.<br>
+          <strong>Contributing:</strong> Monitoring alerts for RAID health were routed to spam folder.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">Action Items</span>
+        <div class="sub-block">
+          <span class="tag">Immediate</span> Replace RAID controller on remaining DB nodes
+        </div>
+        <div class="sub-block info">
+          <span class="tag">Process</span> Add RAID health to primary dashboard
+        </div>
+        <div class="sub-block success">
+          <span class="tag">Alerting</span> Route hardware alerts to #incidents channel
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Header</span> ID + date + severity</div>
+        <div class="legend-item"><span class="anat danger">Summary</span> What + impact</div>
+        <div class="legend-item"><span class="anat info">Timeline</span> What happened when</div>
+        <div class="legend-item"><span class="anat warning">Root Cause</span> Why it happened</div>
+        <div class="legend-item"><span class="anat success">Actions</span> Prevention steps</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BUSINESS CASE ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Business Case</h2>
+      <span class="type-label">Investment Justification</span>
+      <span class="source-ref">exa · tavily</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Header</span>
+        <div class="kv-row">
+          <span class="kv-key">Project:</span>
+          <span class="kv-val"><strong>CRM Migration to Salesforce</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Date:</span>
+          <span class="kv-val"><strong>May 19, 2026</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Author:</span>
+          <span class="kv-val"><strong>Lisa Chen, Head of Sales Ops</strong></span>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label danger">Executive Summary</span>
+        <div class="block-content">
+          <strong>Request:</strong> $180,000 investment to migrate CRM from HubSpot to Salesforce<br>
+          <strong>ROI:</strong> Projected 25% increase in sales productivity = $420k/year additional revenue<br>
+          <strong>Payback period:</strong> 10 months
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Problem / Opportunity</span>
+        <div class="block-content">
+          Current HubSpot instance lacks <strong>advanced reporting</strong>, <strong>custom workflows</strong>, and <strong>enterprise integrations</strong> needed to scale sales operations beyond $50M ARR.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Options Analysis</span>
+        <table class="anat-table">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Cost</th>
+              <th>Timeline</th>
+              <th>Risk</th>
+              <th>Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A. Stay on HubSpot</td>
+              <td>$0</td>
+              <td>N/A</td>
+              <td>High (limiting growth)</td>
+              <td>❌ Not recommended</td>
+            </tr>
+            <tr>
+              <td>B. Migrate to Salesforce</td>
+              <td>$180k</td>
+              <td>6 months</td>
+              <td>Medium</td>
+              <td>✅ Recommended</td>
+            </tr>
+            <tr>
+              <td>C. Build custom solution</td>
+              <td>$400k</td>
+              <td>12 months</td>
+              <td>High</td>
+              <td>❌ Not recommended</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block">
+        <span class="block-label success">Financial Analysis</span>
+        <div class="stats-row" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-block">
+            <span class="anat danger">Investment</span>
+            <span class="value">$180k</span>
+          </div>
+          <div class="stat-block">
+            <span class="anat success">Annual Benefit</span>
+            <span class="value">$420k</span>
+          </div>
+          <div class="stat-block">
+            <span class="anat info">ROI</span>
+            <span class="value">133%</span>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label slate">Recommendation</span>
+        <div class="block-content">
+          <strong>Proceed with Option B</strong> — Salesforce migration provides best balance of cost, timeline, and capability improvement. Target start: July 1, 2026.
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat">Header</span> Project + author</div>
+        <div class="legend-item"><span class="anat danger">Summary</span> Ask + ROI</div>
+        <div class="legend-item"><span class="anat warning">Problem</span> Why change</div>
+        <div class="legend-item"><span class="anat info">Options</span> Alternatives</div>
+        <div class="legend-item"><span class="anat success"> financials</span> Investment vs return</div>
+        <div class="legend-item"><span class="anat slate">Rec</span> Decision</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXECUTIVE BRIEF (BLUF) ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Executive Brief</h2>
+      <span class="type-label">BLUF Format</span>
+      <span class="source-ref">firecrawl · tavily</span>
+    </div>
+    <div class="anatomy">
+      <div class="block">
+        <span class="block-label">Subject</span>
+        <div class="kv-row">
+          <span class="kv-key">To:</span>
+          <span class="kv-val"><strong>Executive Leadership Team</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">From:</span>
+          <span class="kv-val"><strong>Marcus Rivera, VP Engineering</strong></span>
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Date:</span>
+          <span class="kv-val"><strong>May 19, 2026</strong></span>
+        </div>
+      </div>
+      <div class="block" style="background:linear-gradient(135deg,rgba(217,119,87,0.08),rgba(92,124,163,0.08));">
+        <span class="block-label danger">BLUF</span>
+        <div class="block-content" style="font-size:15px;font-weight:500;color:var(--slate);">
+          Request <strong>approval</strong> to hire 3 additional engineers (cost: $450k/year) to meet Q4 launch deadline; without approval, delivery slips to Q1 2027.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">Summary</span>
+        <div class="block-content">
+          Platform migration is <strong>6 weeks behind schedule</strong> due to unexpected complexity in the payment integration. Current team cannot recover timeline without adding headcount or descoping features.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label warning">Background</span>
+        <div class="block-content">
+          Q4 launch commitment was based on 8-engineer team. Since then, 2 engineers departed and replacement hiring took 8 weeks. Remaining scope requires 10 engineers to hit original date.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label info">Analysis</span>
+        <div class="sub-block">
+          <span class="tag">Option A</span> Hire 3 engineers (+$450k) — hit Q4 date
+        </div>
+        <div class="sub-block warning">
+          <span class="tag">Option B</span> Descope payment features — delay 4 weeks, lower quality
+        </div>
+        <div class="sub-block danger">
+          <span class="tag">Option C</span> Accept delay to Q1 2027
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label success">Recommendation</span>
+        <div class="block-content">
+          <strong>Proceed with Option A.</strong> Engineering leadership confirms candidates available; onboarding takes 4 weeks; they can contribute before launch.
+        </div>
+      </div>
+      <div class="block">
+        <span class="block-label slate">Approval Requested</span>
+        <div class="block-content">
+          Budget: <strong>$450,000</strong> (FY2026 carryover)<br>
+          Timeline: <strong>Decision needed by May 26</strong><br>
+          Approvers: <strong>CEO, CFO</strong>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="anat danger">BLUF</span> Bottom line upfront</div>
+        <div class="legend-item"><span class="anat success">Summary</span> 1-2 sentence overview</div>
+        <div class="legend-item"><span class="anat warning">Background</span> Context + history</div>
+        <div class="legend-item"><span class="anat info">Analysis</span> Options + tradeoffs</div>
+        <div class="legend-item"><span class="anat success">Rec</span> Recommended action</div>
+        <div class="legend-item"><span class="anat slate">Approval</span> What + when + who</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DOCUMENT COMPARISON ===================== -->
+  <section class="doc-section">
+    <div class="doc-section-header">
+      <h2>Document Comparison</h2>
+      <span class="type-label">Quick Reference</span>
+    </div>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Document</th>
+          <th>Purpose</th>
+          <th>Key Question</th>
+          <th>Tone</th>
+          <th>Typical Length</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Email</td>
+          <td>Quick correspondence</td>
+          <td>What do you need me to know/do?</td>
+          <td>Conversational</td>
+          <td>3-5 paragraphs</td>
+        </tr>
+        <tr>
+          <td>Memo</td>
+          <td>Internal announcement</td>
+          <td>What changed and why?</td>
+          <td>Professional</td>
+          <td>1-2 pages</td>
+        </tr>
+        <tr>
+          <td>Policy</td>
+          <td>Rules and governance</td>
+          <td>What is required and why?</td>
+          <td>Formal / Third-person</td>
+          <td>2-10 pages</td>
+        </tr>
+        <tr>
+          <td>Status Report</td>
+          <td>Progress update</td>
+          <td>What's done? What's next?</td>
+          <td>Neutral</td>
+          <td>1-2 pages</td>
+        </tr>
+        <tr>
+          <td>Proposal</td>
+          <td>Win work</td>
+          <td>Why should you choose us?</td>
+          <td>Persuasive</td>
+          <td>5-15 pages</td>
+        </tr>
+        <tr>
+          <td>SOW</td>
+          <td>Legal agreement</td>
+          <td>What exactly will we deliver?</td>
+          <td>Formal / Legal</td>
+          <td>5-20 pages</td>
+        </tr>
+        <tr>
+          <td>Invoice</td>
+          <td>Request payment</td>
+          <td>How much do you owe?</td>
+          <td>Formal</td>
+          <td>1 page</td>
+        </tr>
+        <tr>
+          <td>Meeting Minutes</td>
+          <td>Record decisions</td>
+          <td>What was decided?</td>
+          <td>Neutral</td>
+          <td>1-3 pages</td>
+        </tr>
+        <tr>
+          <td>Press Release</td>
+          <td>Media announcement</td>
+          <td>What's newsworthy?</td>
+          <td>Journalistic</td>
+          <td>1-2 pages</td>
+        </tr>
+        <tr>
+          <td>FAQ</td>
+          <td>Answer questions</td>
+          <td>Common questions?</td>
+          <td>Clear / Concise</td>
+          <td>1-5 pages</td>
+        </tr>
+        <tr>
+          <td>Release Notes</td>
+          <td>Inform users</td>
+          <td>What changed?</td>
+          <td>Technical / User</td>
+          <td>1-3 pages</td>
+        </tr>
+        <tr>
+          <td>Incident Report</td>
+          <td>Post-mortem</td>
+          <td>What happened and why?</td>
+          <td>Blunt / Factual</td>
+          <td>2-5 pages</td>
+        </tr>
+        <tr>
+          <td>Business Case</td>
+          <td>Justify investment</td>
+          <td>Why should we spend this?</td>
+          <td>Analytical</td>
+          <td>3-10 pages</td>
+        </tr>
+        <tr>
+          <td>Executive Brief</td>
+          <td>Get rapid approval</td>
+          <td>What's the decision?</td>
+          <td>Direct / BLUF</td>
+          <td>1-2 pages</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+</body>
+</html>
