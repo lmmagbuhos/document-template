@@ -1,0 +1,13 @@
+{
+  "document_title": "Test title",
+  "document_number": "001",
+  "department": "HR",
+  "supersedes": "seupersedes",
+  "effective_date": "May 05, 2026",
+  "body_content": "1.0 Objective / Purpose\n\nThis document establishes the requirements for employees who request and participate in a flexible work arrangement.\n\n2.0 Scope and Coverage\n\nThis guidance applies to employees seeking to begin a flexible work arrangement and to supervisors, managers, and Human Resources personnel responsible for reviewing, approving, monitoring, and maintaining related records.\n\n3.0 Policy Guidelines\n\nEmployees must submit a request to their immediate supervisor before starting a flexible work arrangement.\n\nSupervisors must review each request based on role suitability, team coverage, productivity expectations, and client or operational requirements.\n\nApproved employees must:\n\n• Remain reachable during agreed working hours.\n• Attend required meetings.\n• Protect company information.\n• Comply with all existing HR and IT policies.\n\n4.0 Roles and Responsibilities\n\nManagers are responsible for monitoring performance and ensuring team coverage.\n\nHuman Resources is responsible for maintaining approved arrangement records and advising managers on policy interpretation.\n\nEmployees are responsible for maintaining productivity, confidentiality, and professional availability.\n\n5.0 Compliance and Accountability\n\nFailure to follow an approved arrangement may result in revocation of the privilege and other corrective action consistent with company policy.",
+  "prepared_by_name": "Maria Santos",
+  "prepared_by_role": "HR Manager",
+  "approved_by_name": "Juan Dela Cruz",
+  "approved_by_role": "Chief Operating Officer",
+  "approval_date": "May 21, 2026"
+}
